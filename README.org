@@ -1,0 +1,21 @@
+#+TITLE: Minigrep in 12 languages
+#+AUTHOR: [[https://dev.knightoffaith.systems][Brad White]]
+#+REPOSITORY: https://github.com/silent-brad/minigrep-in-12-langs
+#+DATE: 2025-11-11
+
+** Implemented minigrep in these languages
+*** *Haskell*
+*** *Scheme*
+*** *Nim*
+*** *Rust*
+*** *Lua*
+*** *Elixir*
+*** *Go*
+*** *Gleam*
+*** *Java*
+*** *TypeScript*
+*** *C++*
+*** *OCaml*
+
+** Command
+To run: ~nix build .#~ with the language

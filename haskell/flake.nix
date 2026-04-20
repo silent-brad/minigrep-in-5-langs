@@ -6,10 +6,18 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import nixpkgs { inherit system; };
-      in {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
         packages.default = pkgs.stdenv.mkDerivation {
           pname = "minigrep-in-haskell";
           version = "0.0.1";
@@ -19,9 +27,7 @@
 
           buildPhase = ''
             mkdir -p $out/bin
-            ${pkgs.haskellPackages.ghc}/bin/ghc -o $out/bin/minigrep-hs ${
-              ./minigrep.hs
-            }
+            ${pkgs.haskellPackages.ghc}/bin/ghc -o $out/bin/minigrep-hs ${./minigrep.hs}
           '';
         };
 
@@ -34,5 +40,6 @@
             ormolu
           ];
         };
-      });
+      }
+    );
 }

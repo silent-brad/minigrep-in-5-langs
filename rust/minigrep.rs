@@ -13,15 +13,23 @@ fn main() {
     let filename = &args[2];
 
     // Get file contents
-    let contents = std::fs::read_to_string(filename).expect("Something went wrong reading the file");
+    let contents =
+        std::fs::read_to_string(filename).expect("Something went wrong reading the file");
     let lines = contents.lines();
 
     // Get matches
-    let matches: Vec<(usize, &str)> = contents.lines().into_iter().enumerate().filter(|(i, line)| line.contains(query)).collect();
+    let matches: Vec<(usize, &str)> = contents
+        .lines()
+        .into_iter()
+        .enumerate()
+        .filter(|(i, line)| line.contains(query))
+        .collect();
 
     // print matches
     match matches.len() {
         0 => println!("No matches found for '{}' in {}", query, filename),
-        _ => matches.into_iter().for_each(|(i, line)| println!("{}: {}", i + 1, line)),
+        _ => matches
+            .into_iter()
+            .for_each(|(i, line)| println!("{}: {}", i + 1, line)),
     }
 }

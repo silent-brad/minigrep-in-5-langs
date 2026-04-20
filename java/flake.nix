@@ -6,10 +6,18 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import nixpkgs { inherit system; };
-      in {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
         packages.default = pkgs.stdenv.mkDerivation {
           pname = "minigrep-in-java";
           version = "0.0.1";
@@ -29,5 +37,6 @@
         };
 
         devShells.default = pkgs.mkShell { packages = with pkgs; [ jdk17 ]; };
-      });
+      }
+    );
 }

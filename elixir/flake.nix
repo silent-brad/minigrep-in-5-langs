@@ -6,15 +6,28 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import nixpkgs { inherit system; };
-      in {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
         packages.default = pkgs.writers.writeBash "minigrep-elixir" ''
           #!${pkgs.runtimeShell}
           ${pkgs.elixir_1_18}/bin/elixir minigrep.exs "$@"
         '';
-        devShell =
-          pkgs.mkShell { buildInputs = with pkgs; [ erlang elixir_1_18 ]; };
-      });
+        devShell = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            erlang
+            elixir_1_18
+          ];
+        };
+      }
+    );
 }

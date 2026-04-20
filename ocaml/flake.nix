@@ -6,16 +6,27 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = import nixpkgs { inherit system; };
-      in {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
         packages.default = pkgs.stdenv.mkDerivation {
           pname = "minigrep-in-ocaml";
           version = "0.0.1";
           src = ./.;
 
-          buildInputs = with pkgs; [ ocaml dune_3 ];
+          buildInputs = with pkgs; [
+            ocaml
+            dune_3
+          ];
 
           buildPhase = ''
             mkdir -p $out/bin
@@ -24,7 +35,12 @@
           '';
         };
 
-        devShells.default =
-          pkgs.mkShell { packages = with pkgs; [ ocaml dune_3 ]; };
-      });
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            ocaml
+            dune_3
+          ];
+        };
+      }
+    );
 }

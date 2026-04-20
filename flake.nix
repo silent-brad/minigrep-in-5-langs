@@ -18,7 +18,13 @@
     ocaml.url = "path:./ocaml/";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      ...
+    }@inputs:
     flake-utils.lib.eachDefaultSystem (system: {
       packages = {
         haskell = inputs.haskell.packages."${system}".default;
