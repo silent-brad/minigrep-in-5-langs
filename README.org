@@ -4,18 +4,18 @@
 #+DATE: 2025-11-11
 
 ** Implemented minigrep in these languages
-*** *Haskell*
-*** *Scheme*
-*** *Nim*
-*** *Rust*
-*** *Lua*
-*** *Elixir*
-*** *Go*
-*** *Gleam*
-*** *Java*
-*** *TypeScript*
-*** *C++*
-*** *OCaml*
+- Haskell
+- Scheme
+- Nim
+- Rust
+- Lua
+- Elixir
+- Go
+- Gleam
+- Java
+- TypeScript
+- C++
+- OCaml
 
 ** Command
 To run: ~nix build .#~ with the language
